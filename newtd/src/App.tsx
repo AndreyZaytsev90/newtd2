@@ -3,6 +3,9 @@ import './App.css';
 import {TaskPropsType, Todolist} from "./Todolist";
 
 function App() {
+//BLL:
+    const title1: string = "What to learn"
+    const title2: string = "What to buy"
 
     const tasks1: Array<TaskPropsType> = [
         {id: 1, task: "HTML", isDone: true},
@@ -18,11 +21,11 @@ function App() {
         {id: 4, task: "Sneakers", isDone: false},
     ]
 
-
+//UI:
     return (
         <div className="App">
-            <Todolist title="What to learn" tasks={tasks1}/>
-            <Todolist title="What to buy" tasks={tasks2}/>
+            <Todolist title={title1} tasks={tasks1}/>
+            <Todolist title={title2} tasks={tasks2}/>
         </div>
     );
 }
