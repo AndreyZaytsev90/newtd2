@@ -9,19 +9,20 @@ export type TaskPropsType = {
 type TodolistPropsType = {
     title: string
     tasks: TaskPropsType[]
+    removeTask: (id: number) => void
 }
 
-export const Todolist: FC<TodolistPropsType> = ({title, tasks}) => {
+export const Todolist: FC<TodolistPropsType> = ({title, tasks, removeTask}) => {
 
     //const {title, tasks} = props
     const onClickHandler = (id: number) => {
-        alert(id)
+        removeTask(id)
     }
 
-    const tasksJSX: Array<JSX.Element> =
+    let tasksJSX: Array<JSX.Element> =
         tasks.map((task) =>
             <li key={task.id}>
-                <button onClick={() => onClickHandler(task.id)}>X</button>
+                <button onClick={()=>onClickHandler(task.id)}>X</button>
                 <input type="checkbox" checked={task.isDone}/>
                 <span>{task.task}</span>
             </li>
