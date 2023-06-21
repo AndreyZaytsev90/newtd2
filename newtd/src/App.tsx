@@ -38,12 +38,18 @@ function App() {
     const getFilteredTasks = (tasks: Array<TaskPropsType>, filter: FilterValuesType): Array<TaskPropsType> => {
         if (filter === 'active') {
             return tasks.filter(task => task.isDone !== true)
-        } if(filter === 'completed') {
+        }
+        if (filter === 'completed') {
             return tasks.filter(task => task.isDone !== false)
-        } return tasks
-            }
+        }
+        return tasks
+    }
 
     const filteredTasks: Array<TaskPropsType> = getFilteredTasks(tasks1, filter)
+
+    const changeFilter = (filter: FilterValuesType) => {
+        setFilter(filter)
+    }
 
 
 //UI:
@@ -52,7 +58,7 @@ function App() {
             <Todolist title={title1}
                       tasks={filteredTasks}
                       removeTask={removeTask}
-                      getFilteredTasks={getFilteredTasks}
+                      changeFilter={changeFilter}
             />
             {/* <Todolist title={title2} tasks={tasks2}/>*/}
         </div>

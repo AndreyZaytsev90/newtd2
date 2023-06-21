@@ -1,4 +1,4 @@
-import React, {FC} from "react";
+import React, {FC, JSX} from "react";
 import {FilterValuesType} from "./App";
 
 export type TaskPropsType = {
@@ -11,20 +11,29 @@ type TodolistPropsType = {
     title: string
     tasks: TaskPropsType[]
     removeTask: (id: number) => void
-    getFilteredTasks: (tasks: Array<TaskPropsType>, filter: FilterValuesType) => Array<TaskPropsType>
+    changeFilter: (filter: FilterValuesType) => void
 }
 
-export const Todolist: FC<TodolistPropsType> = ({title, tasks, removeTask, getFilteredTasks}) => {
+export const Todolist: FC<TodolistPropsType> = ({
+                                                    title,
+                                                    tasks,
+                                                    removeTask,
+                                                    changeFilter
+                                                }) => {
 
     //const {title, tasks} = props
     const onClickHandler = (id: number) => {
         removeTask(id)
     }
 
+    const onChangeHandler = (filter: FilterValuesType) => {
+        changeFilter(filter)
+    }
+
     let tasksJSX: Array<JSX.Element> =
         tasks.map((task) =>
             <li key={task.id}>
-                <button onClick={()=>onClickHandler(task.id)}>X</button>
+                <button onClick={() => onClickHandler(task.id)}>X</button>
                 <input type="checkbox" checked={task.isDone}/>
                 <span>{task.task}</span>
             </li>
@@ -43,9 +52,9 @@ export const Todolist: FC<TodolistPropsType> = ({title, tasks, removeTask, getFi
                 </ul>
             </div>
             <div>
-                <button onClick={()=>getFilteredTasks(tasks, 'all')}>All</button>
-                <button onClick={()=>getFilteredTasks(tasks, 'active')}>Active</button>
-                <button onClick={()=>getFilteredTasks(tasks, 'completed')}>Completed</button>
+                <button onClick={() => onChangeHandler('all')}>All</button>
+                <button onClick={() => onChangeHandler('active')}>Active</button>
+                <button onClick={() => onChangeHandler('completed')}>Completed</button>
             </div>
         </div>
 
