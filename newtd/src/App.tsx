@@ -7,7 +7,7 @@ export type FilterValuesType = 'all' | 'active' | 'completed'
 function App() {
 //BLL:
     const title1: string = "What to learn"
-    const title2: string = "What to buy"
+   // const title2: string = "What to buy"
 
     let [tasks1, setTasks1] = useState<Array<TaskPropsType>>(
         [
@@ -17,6 +17,7 @@ function App() {
             {id: 4, task: "React", isDone: false},
         ]
     )
+    
 
     let [filter, setFilter] = useState<FilterValuesType>('all')
 
