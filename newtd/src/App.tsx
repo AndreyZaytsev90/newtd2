@@ -9,7 +9,7 @@ function App() {
     const title1: string = "What to learn"
    // const title2: string = "What to buy"
 
-    let [tasks1, setTasks1] = useState<Array<TaskPropsType>>(
+    let [tasks, setTasks] = useState<Array<TaskPropsType>>(
         [
             {id: 1, task: "HTML", isDone: true},
             {id: 2, task: "CSS", isDone: true},
@@ -29,11 +29,11 @@ function App() {
        ]*/
 
     const removeTask = (taskId: number) => {
-        const filteredTasks = tasks1.filter(el => {
+        const filteredTasks = tasks.filter(el => {
             return el.id !== taskId
         })
         console.log(filteredTasks)
-        setTasks1(filteredTasks)
+        setTasks(filteredTasks)
     }
 
     const getFilteredTasks = (tasks: Array<TaskPropsType>, filter: FilterValuesType): Array<TaskPropsType> => {
@@ -46,7 +46,7 @@ function App() {
         return tasks
     }
 
-    const filteredTasks: Array<TaskPropsType> = getFilteredTasks(tasks1, filter)
+    const filteredTasks: Array<TaskPropsType> = getFilteredTasks(tasks, filter)
 
     const changeFilter = (filter: FilterValuesType) => {
         setFilter(filter)
