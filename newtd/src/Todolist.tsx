@@ -39,6 +39,7 @@ export const Todolist: FC<TodolistPropsType> = ({
 
     const addTaskHandler = () => {
         addTask(inputTitle)
+        setInputTitle('')
     }
 
 
