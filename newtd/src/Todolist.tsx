@@ -1,4 +1,4 @@
-import React, {FC, JSX} from "react";
+import React, {ChangeEvent, FC, JSX, useState} from "react";
 import {FilterValuesType} from "./App";
 
 export type TaskPropsType = {
@@ -22,6 +22,7 @@ export const Todolist: FC<TodolistPropsType> = ({
                                                     changeFilter,
                                                     addTask
                                                 }) => {
+    let [inputTitle, setInputTitle] = useState('')
 
     //const {title, tasks} = props
     const onClickHandler = (id: string) => {
@@ -32,9 +33,15 @@ export const Todolist: FC<TodolistPropsType> = ({
         changeFilter(filter)
     }
 
-    const addTaskHandler = (title: string) => {
-        addTask(title)
+    const onChangeAddTaskHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        setInputTitle(e.currentTarget.value)
     }
+
+    const addTaskHandler = () => {
+        addTask(inputTitle)
+    }
+
+
 
     let tasksJSX: Array<JSX.Element> =
         tasks.map((task) =>
@@ -49,8 +56,8 @@ export const Todolist: FC<TodolistPropsType> = ({
         <div>
             <h1>{title}</h1>
             <div>
-                <input type="text"/>
-                <button onClick={() =>addTaskHandler('TS')}>+</button>
+                <input type="text" value={inputTitle} onChange={onChangeAddTaskHandler}/>
+                <button onClick={addTaskHandler}>+</button>
             </div>
             <div>
                 <ul>
