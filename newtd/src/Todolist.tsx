@@ -8,11 +8,13 @@ export type TaskPropsType = {
 }
 
 type TodolistPropsType = {
+    //id: string
     title: string
     tasks: TaskPropsType[]
     removeTask: (id: string) => void
     changeFilter: (filter: FilterValuesType) => void
     addTask: (title: string) => void
+    filter: FilterValuesType
 }
 
 export const Todolist: FC<TodolistPropsType> = ({
@@ -20,34 +22,27 @@ export const Todolist: FC<TodolistPropsType> = ({
                                                     tasks,
                                                     removeTask,
                                                     changeFilter,
-                                                    addTask
+                                                    addTask,
+                                                    //id
+                                                    filter
                                                 }) => {
     let [inputTitle, setInputTitle] = useState('')
 
     //const {title, tasks} = props
-    const onClickHandler = (id: string) => {
-        removeTask(id)
-    }
+    const onClickHandler = (id: string) => removeTask(id)
 
-    const onChangeHandler = (filter: FilterValuesType) => {
-        changeFilter(filter)
-    }
+    const onAllChangeHandler = () => changeFilter('all')
+    const onActiveChangeHandler = () => changeFilter('active')
+    const onCompletedChangeHandler = () => changeFilter('completed')
 
-    const onChangeAddTaskHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        setInputTitle(e.currentTarget.value)
-    }
+    const onChangeAddTaskHandler = (e: ChangeEvent<HTMLInputElement>) => setInputTitle(e.currentTarget.value)
 
     const addTaskHandler = () => {
         addTask(inputTitle)
         setInputTitle('')
     }
 
-    const keyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === 'Enter') {
-            addTask(inputTitle)
-            setInputTitle('')
-        }
-    }
+    const keyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => e.key === 'Enter' && addTaskHandler()
 
 
     let tasksJSX: Array<JSX.Element> =
@@ -75,9 +70,9 @@ export const Todolist: FC<TodolistPropsType> = ({
                 </ul>
             </div>
             <div>
-                <button onClick={() => onChangeHandler('all')}>All</button>
-                <button onClick={() => onChangeHandler('active')}>Active</button>
-                <button onClick={() => onChangeHandler('completed')}>Completed</button>
+                <button onClick={onAllChangeHandler}>All</button>
+                <button onClick={onActiveChangeHandler}>Active</button>
+                <button onClick={onCompletedChangeHandler}>Completed</button>
             </div>
         </div>
 

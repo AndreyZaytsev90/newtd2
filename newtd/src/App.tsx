@@ -67,6 +67,8 @@ function App() {
                       removeTask={removeTask}
                       changeFilter={changeFilter}
                       addTask={addTask}
+                      filter={filter}
+
             />
             {/* <Todolist title={title2} tasks={tasks2}/>*/}
         </div>
