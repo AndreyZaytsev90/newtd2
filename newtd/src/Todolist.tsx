@@ -14,7 +14,6 @@ type TodolistPropsType = {
     removeTask: (id: string) => void
     changeFilter: (filter: FilterValuesType) => void
     addTask: (title: string) => void
-    filter: FilterValuesType
 }
 
 export const Todolist: FC<TodolistPropsType> = ({
@@ -23,13 +22,10 @@ export const Todolist: FC<TodolistPropsType> = ({
                                                     removeTask,
                                                     changeFilter,
                                                     addTask,
-                                                    //id
-                                                    filter
                                                 }) => {
     let [inputTitle, setInputTitle] = useState('')
 
     //const {title, tasks} = props
-    const onClickHandler = (id: string) => removeTask(id)
 
     const onAllChangeHandler = () => changeFilter('all')
     const onActiveChangeHandler = () => changeFilter('active')
@@ -46,12 +42,18 @@ export const Todolist: FC<TodolistPropsType> = ({
 
 
     let tasksJSX: Array<JSX.Element> =
-        tasks.map((task) =>
-            <li key={task.id}>
-                <button onClick={() => onClickHandler(task.id)}>X</button>
-                <input type="checkbox" checked={task.isDone}/>
-                <span>{task.task}</span>
-            </li>
+        tasks.map((task) => {
+
+                const removeTaskHandler = () => removeTask(task.id)
+
+                return (
+                    <li key={task.id}>
+                        <button onClick={removeTaskHandler}>X</button>
+                        <input type="checkbox" checked={task.isDone}/>
+                        <span>{task.task}</span>
+                    </li>
+                )
+            }
         )
 
     return (
